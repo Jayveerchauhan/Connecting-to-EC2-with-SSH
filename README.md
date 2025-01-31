@@ -1,4 +1,4 @@
-# How to launch and work with EC2-AWS instances
+![docker](https://github.com/user-attachments/assets/6c7c22f8-96c3-4340-a196-fd9b02faf582)# How to launch and work with EC2-AWS instances
 
 ## Introduction
 
@@ -141,3 +141,131 @@ Navigate to your key directory in your Terminal using cd.
 Run: puttygen mykey.pem -o mykey.ppk
 Swap the “mykey” file names for your file names
 
+
+## Docker Overview & Installation
+This document covers the basic docker commands used frequently when working with images and containers.
+
+
+![docker](https://github.com/user-attachments/assets/583cfad1-3a57-477f-ae4e-356be1f0db22)
+
+# What is Docker?
+Docker is an amazingly popular software for creating virtual environments that can be used to deploy applications in containerized (controlled) environments.
+
+# How Docker Works
+
+A Shiny App run on AWS EC2 consists of:
+
+1.Files - Controlled by git version control
+2.Software Environment - Controlled by docker image
+
+
+![docker_1](https://github.com/user-attachments/assets/4548dd8a-34f8-49f5-9cdc-8f6acb903ccd)
+
+
+# Definitions
+1.DockerHub - An online community for storing and sharing container images. Has Public and Private repositories for image storage.
+
+2.Container - A container is a virtual environment that combines a Docker Image with software (files) to run an application in a controlled environment (a reproducible software environment created virtually from the Docker Image).
+
+3.Image - An image is an environment that has been built from a series of instructions called a DockerFile. Images can be prebuilt and hosted on DockerHub (similar to how GitHub hosts version controlled software files). The image is needed to run a Docker Container.
+
+# Installation
+Install using sudo apt-get install docker.io
+
+sudo apt-get install docker.io
+Note: I no longer recommend using sudo snap install docker because the snap version may be out-dated.
+
+##  Docker Command Line Interface (CLI)
+
+#  General
+docker --help - Show all docker commands
+docker --version - Show the Docker version information - Good for verifying that docker is installed
+
+![docker_help](https://github.com/user-attachments/assets/296fed9a-08f3-475c-995a-de317a429a59)
+
+# DockerHub
+
+DockerHub (https://hub.docker.com/) contains many pre-built images that other users and organizations have created.
+
+These commands are useful for connecting to a remote Docker registry to download docker images.
+
+login - Log in to a Docker registry
+logout - Log out from a Docker registry
+search - Search the Docker Hub for images
+push - Push an image or a repository to a registry
+pull - Pull an image or a repository from a registry
+commit - Create a new image from a container’s changes
+
+ # Containers
+Use docker container --help to list all “container management” commands. These are the common commands.
+
+run - Run a command in a new container
+ps - List running containers (I use docker container ls, which does the same thing)
+stop - Stop one or more running containers
+start - Start one or more stopped containers
+rm - Remove one or more containers (I use docker container rm, which does the same thing)
+
+# Images
+Use docker image --help to list “image management” commands.
+
+build - Build an image from a Dockerfile
+tag - Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+images - List images (I use docker image ls, which does the same thing)
+rmi - Remove one or more images (I use docker image rm, which does the same thing)
+
+
+
+##  Docker Hub
+
+This document covers the using Docker Hub (https://hub.docker.com/) to find images that will help as a starting point for the software container that will run your application.
+
+# Create an Account
+Create an account at Docker Hub (https://hub.docker.com/) to be able to push and pull Docker Hub images.
+
+
+![docker_hub](https://github.com/user-attachments/assets/05e17115-ec88-4a02-a04e-4c93ee41a5d7)
+
+# Log Into Docker via Command Line
+Use docker login to log into DockerHub via the commandline.
+
+docker login --help - Use this to see the options for logging in
+docker login -u your_user_name - The -u option allows us to pass our user name.
+Password - The prompt will request our password for DockerHub
+
+
+![docker_login](https://github.com/user-attachments/assets/b38fea5a-264d-4b90-8dc1-e20c6dc69c51)
+
+# Searching Docker Hub
+Use docker search to search for containers related to our project. Alternatively we can search on the DockerHub website.
+
+docker search shiny - Searches all instances where “shiny” is present. Sorts by DockerHub Stars.
+NAME - Docker registry name
+STARS - Docker Hub Star count
+
+
+
+![docker_search](https://github.com/user-attachments/assets/9ae82110-6e3d-473f-b8d3-67b377b9af3a)
+
+# Searching Docker Hub
+Use docker search to search for containers related to our project. Alternatively we can search on the DockerHub website.
+
+docker search shiny - Searches all instances where “shiny” is present. Sorts by DockerHub Stars.
+NAME - Docker registry name
+STARS - Docker Hub Star count
+
+
+![docker_pull](https://github.com/user-attachments/assets/1e6666de-9f93-4581-8f4e-cc55074709f9)
+
+# List the Docker Images
+docker image ls - List the local docker images installed on the EC2 Server.
+Note that you will likely have fewer images
+Size - If you install many images, you can quickly eat up server space
+
+![docker_image_ls](https://github.com/user-attachments/assets/d31a27d2-8548-4623-a302-ecd5ee0614bb)
+
+
+# Wrapup
+Now you have the following Docker Images successfully installed on your EC2 Server:
+
+rocker/shiny-verse - Contains shiny server and the tidyverse R packages
+rocker/tidyverse - Contains rstudio server and the tidyverse R packages
