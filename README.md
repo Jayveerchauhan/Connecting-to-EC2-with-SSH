@@ -1,4 +1,4 @@
-![docker](https://github.com/user-attachments/assets/6c7c22f8-96c3-4340-a196-fd9b02faf582)# How to launch and work with EC2-AWS instances
+# How to launch and work with EC2-AWS instances
 
 ## Introduction
 
