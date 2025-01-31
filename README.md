@@ -79,3 +79,65 @@ It's very important to stop your EC2 instance when you are done for the day. Oth
 * Go to your EC2 dashboard in AWS. You'll see that under `Instance State` the EC2 instance you've been working with be listed as `running`. Right click on the word `running` and a menu will pop up. Hover over `Instance State` and you will see a series of options. Most often you will want to either `Stop` or `Start` the instance. **If you select `Terminate`, you will delete the entire instance, and you will have to start all over to set up the instance.** If you select `Stop`, the instance will stop running, but you will see this instance, complete with your programs and files, when you log back in. 
 
 * The next time you log in, go back to your EC2 Dashboard and change the `Instance State` to `Start`. Then you can start from step 3 of this guide to log in to the instance. The key file (the `xxxx.pem`) will be the same, but note that the IP address (in the `IPv4 Public IP` column on your Dashboard) will change every time you stop and restart the instance. 
+
+
+
+
+
+# Connecting to EC2 with SSH (Secure Shell)
+
+## Windows - Putty
+Windows Putty Installation - These instructions are a simplified version of AWS’s Putty Connection instructions for the Ubuntu AMI.
+## Step 1 - Download Putty
+Download Putty from putty.org. Select the version that matches your version of Windows.
+ ![ssh_step1](https://github.com/user-attachments/assets/8d01e6ae-363d-410d-a91d-3c24c18fee2f)
+
+ ## Step 2 - Convert .pem to .ppk with PuttyGen
+Open PuttyGen to convert the .pem file to a .ppk file. Load the .pem by navigating to your AWS Keys folder (you make this and store the key here during the Key-Pair step). Once loaded, select “RSA” and click “Save Private Key”. This will generate a .ppk file.
+![ssh_step2](https://github.com/user-attachments/assets/2c169eae-1a5a-41a8-972b-76246bb10175)
+
+## Step 3 - Connect to EC2 with Putty
+Open Putty to SSH into (connect to) the EC2 Server via the Command Line Interface (CLI).
+![ssh_step3](https://github.com/user-attachments/assets/c7fa1326-9026-49e6-a8e0-d342d6f3695c)
+
+## You can find your Public DNS for your EC2 Server here.
+![Uploading ssh_step3b.jpg…]()
+
+## Part 2 - Setup the path to your .ppk file
+Under Connection > SSH > Auth, add the location of your .ppk file.
+![ssh_step4](https://github.com/user-attachments/assets/8cf9fa64-65fa-4406-94aa-c3a3b3bff9d2)
+##  Part 3 (Optional) - Save these settings in Putty
+![ssh_step3c](https://github.com/user-attachments/assets/8e828ee4-579f-4da0-b84f-8b341e6f1c81)
+
+## Step 4 - Connect to CLI
+The Command Line Interface (CLI) to the AWS Ubuntu Server should now open.
+![ssh_step5](https://github.com/user-attachments/assets/7b193170-562b-429c-964b-ee911e52507d)
+
+## Mac / Linux - Terminal
+ ##  SSH into EC2
+ Linux are much easier to set up. Just use the terminal in either RStudio or Terminal App on Mac.
+
+Navigate in your Terminal to the location of your AWS .pem file. Use cd ./Desktop/aws_key.
+
+Run: chmod 400 your_pem_file.pem
+
+![ssh_mac1](https://github.com/user-attachments/assets/067e9434-add9-4ec2-9dfc-ab6238727a1d)
+
+Use the SSH script from the EC2 “Connect” Popup Instructions.
+
+![ssh_mac2](https://github.com/user-attachments/assets/7bd36f52-b97f-4bc8-8cd1-78324bfae2e3)
+
+## (Optional) Add Key (.pem) File to SSH List
+
+You can store your AWS EC2 Key .pem location using ssh-add -K <path-to>/your_key.pem. Then, subsequent reconnects will not need the -i flag.
+
+##  Create a .ppk file (used later with FileZilla)
+
+Sometimes you will need to convert a .pem file to a .ppk file.
+
+Install putty via Terminal: brew install putty
+If you don’t have Homebrew installed visit: https://brew.sh/
+Navigate to your key directory in your Terminal using cd.
+Run: puttygen mykey.pem -o mykey.ppk
+Swap the “mykey” file names for your file names
+
